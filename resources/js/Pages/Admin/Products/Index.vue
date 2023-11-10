@@ -1,5 +1,7 @@
 <template lang="">
     <AdminLayout>
+        <Head title="Products" />
+
         <div>
             <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
                 <div class="mx-auto px-4 lg:px-12">
@@ -46,7 +48,8 @@
                             <div
                                 class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
                             >
-                                <button @click="openAddModal"
+                                <button
+                                    @click="openAddModal"
                                     type="button"
                                     class="flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
                                 >
@@ -340,11 +343,16 @@
                                                         >
                                                     </li>
                                                     <li>
-                                                        <a
-                                                            href="#"
+                                                        <button
+                                                            @click="
+                                                                openEditModal(
+                                                                    product
+                                                                )
+                                                            "
                                                             class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                                            >Edit</a
                                                         >
+                                                            Edit
+                                                        </button>
                                                     </li>
                                                 </ul>
                                                 <div class="py-1">
@@ -464,42 +472,179 @@
             </section>
         </div>
 
-        <el-dialog
-    v-model="isAddProduct"
-    title="Tips"
-    width="30%"
-    :before-close="handleClose"
-  >
-    <span>This is a message</span>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="isAddProduct = false">Cancel</el-button>
-        <el-button type="primary" @click="isAddProduct = false">
-          Confirm
-        </el-button>
-      </span>
-    </template>
-  </el-dialog>
+        <!-- add product form start -->
 
+        <el-dialog
+            v-model="dialogVisible"
+            :title="isEditMode ? 'Edit Product' : 'Add Product'"
+            width="30%"
+            :before-close="handleClose"
+        >
+            <form @submit.prevent="createProduct">
+                <div class="relative z-0 w-full mb-6 group">
+                    <input
+                        v-model="addProductForm.title"
+                        type="text"
+                        name="title"
+                        id="title"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        placeholder=" "
+                    />
+                    <label
+                        for="title"
+                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                        >Title</label
+                    >
+                    <div v-if="errors.title">{{ errors.title }}</div>
+                </div>
+                <div class="relative z-0 w-full mb-6 group">
+                    <label
+                        for="description"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                        Description
+                    </label>
+                    <textarea
+                        v-model="addProductForm.description"
+                        id="description"
+                        rows="4"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder=" Enter Description "
+                    ></textarea>
+                    <div v-if="errors.description">
+                        {{ errors.description }}
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 md:gap-6">
+
+
+                    <div class="relative z-0 w-full mb-6 group">
+
+                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Category </label >
+                        <select v-model="addProductForm.category_id" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        >
+                            <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+                        </select>
+
+                        <div v-if="errors.category_id">
+                            {{ errors.category_id }}
+                        </div>
+                    </div>
+                    <div class="relative z-0 w-full mb-6 group">
+
+                        <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Brand </label>
+                        <select  v-model="addProductForm.brand_id" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        >
+                        <option v-for="brand in brands" :key="brand.id" :value="brand.id">{{ brand.name }}</option>
+
+                        </select>
+                        <div v-if="errors.brand_id">{{ errors.brand_id }}</div>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 md:gap-6">
+                    <div class="relative z-0 w-full mb-6 group">
+                        <input
+                            v-model="addProductForm.price"
+                            type="number"
+                            name="price"
+                            id="price"
+                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            placeholder=" "
+                        />
+                        <label
+                            for="price"
+                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                            >Price</label
+                        >
+                        <div v-if="errors.price">{{ errors.price }}</div>
+                    </div>
+                    <div class="relative z-0 w-full mb-6 group">
+                        <input
+                            v-model="addProductForm.quantity"
+                            type="number"
+                            name="quantity"
+                            id="quantity"
+                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            placeholder=" "
+                        />
+                        <label
+                            for="quantity"
+                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                            >Quantity</label
+                        >
+                        <div v-if="errors.quantity">{{ errors.quantity }}</div>
+                    </div>
+                </div>
+                <button
+                    type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                    Submit
+                </button>
+            </form>
+        </el-dialog>
+
+        <!-- add product form end -->
     </AdminLayout>
 </template>
 <script setup>
-import { usePage } from "@inertiajs/vue3";
+import { Head, usePage } from "@inertiajs/vue3";
+import { useForm } from "@inertiajs/vue3";
 import AdminLayout from ".././Components/AdminLayout.vue";
-
-const products = usePage().props.products;
 import { ref } from "vue";
-// console.log(products);
+
+import Swal from "sweetalert2";
+
+defineProps({
+    categories: Array,
+    brands: Array,
+    products: Array,
+    errors: Object,
+});
 
 // open add modal
 const isAddProduct = ref(false);
+const isEditMode = ref(false);
+
+const dialogVisible = ref(false);
 
 const openAddModal = () => {
     isAddProduct.value = true;
+    dialogVisible.value = true;
+    isEditMode.value = false;
+};
+const openEditModal = (product) => {
+    console.log(product);
+    title.value = product.title,
 
+        isEditMode.value = true;
+    isAddProduct.value = false;
+    dialogVisible.value = true;
+};
 
-}
+const addProductForm = useForm({
+    title: "",
+    quantity: "",
+    description: "",
+    price: "",
+    category_id: "",
+    brand_id: "",
+});
 
-
+const createProduct = () => {
+    addProductForm.post("/admin/product/store");
+    dialogVisible.value = false;
+    addProductForm.reset();
+    Swal.fire({
+        toast: true,
+        icon: "success",
+        position: "top-end",
+        text: "Product created successfully",
+        showCloseButton: true,
+        showConfirmButton: false,
+        timer: 5000,
+    });
+};
 </script>
 <style lang=""></style>

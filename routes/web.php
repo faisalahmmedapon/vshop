@@ -49,7 +49,7 @@ Route::middleware(['auth','admin','verified'])->prefix('admin')->as('admin.')->g
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
     Route::get('/products', [ProductController::class, 'index'])->name('products');
-    Route::get('/product/store', [ProductController::class, 'store'])->name('product.store');
+    Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
 
 
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');

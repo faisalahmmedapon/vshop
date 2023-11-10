@@ -21,7 +21,7 @@ class Product extends Model
         "price",
         "inStock",
         "category_id",
-        "bland_id",
+        "brand_id",
         "created_by",
         "updated_by",
         "deleted_by",
