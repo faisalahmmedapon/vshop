@@ -280,319 +280,349 @@
                                             scope="row"
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                         >
-                                            {{ product.title }}
-                                        </th>
-                                        <td class="px-4 py-3">
-                                            {{ product.category_id }}
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            {{ product.brand_id }}
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            {{ product.description }}
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            ${{ product.price }}
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            {{ product.quantity }}
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            {{ product.inStock }}
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span v-if="product.published == 1">
-                                                Published
-                                            </span>
-                                            <span v-else> Unpublished </span>
-                                        </td>
-                                        <td
-                                            class="px-4 py-3 flex items-center justify-end"
-                                        >
-                                            <button
-                                                id="apple-imac-27-dropdown-button"
-                                                data-dropdown-toggle="apple-imac-27-dropdown"
-                                                class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
-                                                type="button"
-                                            >
-                                                <svg
-                                                    class="w-5 h-5"
-                                                    aria-hidden="true"
-                                                    fill="currentColor"
-                                                    viewbox="0 0 20 20"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                >
-                                                    <path
-                                                        d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"
-                                                    />
-                                                </svg>
-                                            </button>
-                                            <div
-                                                id="apple-imac-27-dropdown"
-                                                class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
-                                            >
-                                                <ul
-                                                    class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                                    aria-labelledby="apple-imac-27-dropdown-button"
-                                                >
-                                                    <li>
-                                                        <a
-                                                            href="#"
-                                                            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                                            >Show</a
-                                                        >
-                                                    </li>
-                                                    <li>
-                                                        <button
-                                                            @click="
-                                                                openEditModal(
-                                                                    product
-                                                                )
-                                                            "
-                                                            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                                        >
-                                                            Edit
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                                <div class="py-1">
-                                                    <a
-                                                        href="#"
-                                                        class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                                                        >Delete</a
-                                                    >
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <nav
-                            class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
-                            aria-label="Table navigation"
-                        >
-                            <span
-                                class="text-sm font-normal text-gray-500 dark:text-gray-400"
-                            >
-                                Showing
-                                <span
-                                    class="font-semibold text-gray-900 dark:text-white"
-                                    >1-10</span
-                                >
-                                of
-                                <span
-                                    class="font-semibold text-gray-900 dark:text-white"
-                                    >1000</span
-                                >
-                            </span>
-                            <ul class="inline-flex items-stretch -space-x-px">
-                                <li>
-                                    <a
-                                        href="#"
-                                        class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                                    >
-                                        <span class="sr-only">Previous</span>
-                                        <svg
-                                            class="w-5 h-5"
-                                            aria-hidden="true"
-                                            fill="currentColor"
-                                            viewbox="0 0 20 20"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                clip-rule="evenodd"
-                                            />
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="#"
-                                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                                        >1</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        href="#"
-                                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                                        >2</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        href="#"
-                                        aria-current="page"
-                                        class="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                                        >3</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        href="#"
-                                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                                        >...</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        href="#"
-                                        class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                                        >100</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        href="#"
-                                        class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                                    >
-                                        <span class="sr-only">Next</span>
-                                        <svg
-                                            class="w-5 h-5"
-                                            aria-hidden="true"
-                                            fill="currentColor"
-                                            viewbox="0 0 20 20"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                clip-rule="evenodd"
-                                            />
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </section>
-        </div>
+                                            {{
+        product.title
+    }}
+                                           </th>
+                                           <td class="px-4 py-3">
+                                               {{
+        product.category_id
+    }}
+                                           </td>
+                                           <td class="px-4 py-3">
+                                               {{
+        product.brand_id
+    }}
+                                           </td>
+                                           <td class="px-4 py-3">
+                                               {{
+        product.description
+    }}
+                                           </td>
+                                           <td class="px-4 py-3">
+                                               ${{
+        product.price
+    }}
+                                           </td>
+                                           <td class="px-4 py-3">
+                                               {{
+        product.quantity
+    }}
+                                           </td>
+                                           <td class="px-4 py-3">
+                                               {{
+        product.inStock
+    }}
+                                           </td>
+                                           <td class="px-4 py-3">
+                                               <span v-if="product.published == 1">
+                                                   Published
+                                               </span>
+                                               <span v-else> Unpublished </span>
+                                           </td>
+                                           <td
+                                               class="px-4 py-3 flex items-center justify-end"
+                                           >
+                                               <button
+                                                   id="apple-imac-27-dropdown-button"
+                                                   data-dropdown-toggle="apple-imac-27-dropdown"
+                                                   class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
+                                                   type="button"
+                                               >
+                                                   <svg
+                                                       class="w-5 h-5"
+                                                       aria-hidden="true"
+                                                       fill="currentColor"
+                                                       viewbox="0 0 20 20"
+                                                       xmlns="http://www.w3.org/2000/svg"
+                                                   >
+                                                       <path
+                                                           d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"
+                                                       />
+                                                   </svg>
+                                               </button>
+                                               <div
+                                                   id="apple-imac-27-dropdown"
+                                                   class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+                                               >
+                                                   <ul
+                                                       class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                                       aria-labelledby="apple-imac-27-dropdown-button"
+                                                   >
+                                                       <li>
+                                                           <a
+                                                               href="#"
+                                                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                               >Show</a
+                                                           >
+                                                       </li>
+                                                       <li>
+                                                           <button
+                                                               @click="
+                                                                   openEditModal(
+                                                                       product
+                                                                   )
+                                                               "
+                                                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                           >
+                                                               Edit
+                                                           </button>
+                                                       </li>
+                                                   </ul>
+                                                   <div class="py-1">
+                                                       <a
+                                                           href="#"
+                                                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                                           >Delete</a
+                                                       >
+                                                   </div>
+                                               </div>
+                                           </td>
+                                       </tr>
+                                   </tbody>
+                               </table>
+                           </div>
+                           <nav
+                               class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
+                               aria-label="Table navigation"
+                           >
+                               <span
+                                   class="text-sm font-normal text-gray-500 dark:text-gray-400"
+                               >
+                                   Showing
+                                   <span
+                                       class="font-semibold text-gray-900 dark:text-white"
+                                       >1-10</span
+                                   >
+                                   of
+                                   <span
+                                       class="font-semibold text-gray-900 dark:text-white"
+                                       >1000</span
+                                   >
+                               </span>
+                               <ul class="inline-flex items-stretch -space-x-px">
+                                   <li>
+                                       <a
+                                           href="#"
+                                           class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                       >
+                                           <span class="sr-only">Previous</span>
+                                           <svg
+                                               class="w-5 h-5"
+                                               aria-hidden="true"
+                                               fill="currentColor"
+                                               viewbox="0 0 20 20"
+                                               xmlns="http://www.w3.org/2000/svg"
+                                           >
+                                               <path
+                                                   fill-rule="evenodd"
+                                                   d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                                   clip-rule="evenodd"
+                                               />
+                                           </svg>
+                                       </a>
+                                   </li>
+                                   <li>
+                                       <a
+                                           href="#"
+                                           class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                           >1</a
+                                       >
+                                   </li>
+                                   <li>
+                                       <a
+                                           href="#"
+                                           class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                           >2</a
+                                       >
+                                   </li>
+                                   <li>
+                                       <a
+                                           href="#"
+                                           aria-current="page"
+                                           class="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+                                           >3</a
+                                       >
+                                   </li>
+                                   <li>
+                                       <a
+                                           href="#"
+                                           class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                           >...</a
+                                       >
+                                   </li>
+                                   <li>
+                                       <a
+                                           href="#"
+                                           class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                           >100</a
+                                       >
+                                   </li>
+                                   <li>
+                                       <a
+                                           href="#"
+                                           class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                       >
+                                           <span class="sr-only">Next</span>
+                                           <svg
+                                               class="w-5 h-5"
+                                               aria-hidden="true"
+                                               fill="currentColor"
+                                               viewbox="0 0 20 20"
+                                               xmlns="http://www.w3.org/2000/svg"
+                                           >
+                                               <path
+                                                   fill-rule="evenodd"
+                                                   d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                   clip-rule="evenodd"
+                                               />
+                                           </svg>
+                                       </a>
+                                   </li>
+                               </ul>
+                           </nav>
+                       </div>
+                   </div>
+               </section>
+           </div>
 
-        <!-- add product form start -->
+           <!-- add product form start -->
 
-        <el-dialog
-            v-model="dialogVisible"
-            :title="isEditMode ? 'Edit Product' : 'Add Product'"
-            width="30%"
-            :before-close="handleClose"
-        >
-            <form @submit.prevent="createProduct">
-                <div class="relative z-0 w-full mb-6 group">
-                    <input
-                        v-model="addProductForm.title"
-                        type="text"
-                        name="title"
-                        id="title"
-                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" "
-                    />
-                    <label
-                        for="title"
-                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                        >Title</label
-                    >
-                    <div v-if="errors.title">{{ errors.title }}</div>
-                </div>
-                <div class="relative z-0 w-full mb-6 group">
-                    <label
-                        for="description"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                        Description
-                    </label>
-                    <textarea
-                        v-model="addProductForm.description"
-                        id="description"
-                        rows="4"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder=" Enter Description "
-                    ></textarea>
-                    <div v-if="errors.description">
-                        {{ errors.description }}
-                    </div>
-                </div>
+           <el-dialog
+               v-model="dialogVisible"
+               :title="isEditMode ? 'Edit Product' : 'Add Product'"
+               width="30%"
+               :before-close="handleClose"
+           >
+               <form @submit.prevent="createProduct">
+                   <div class="relative z-0 w-full mb-6 group">
+                       <input
+                           v-model="addProductForm.title"
+                           type="text"
+                           name="title"
+                           id="title"
+                           class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                           placeholder=" "
+                       />
+                       <label
+                           for="title"
+                           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                           >Title</label
+                       >
+                       <div v-if="errors.title">{{
+        errors.title
+    }}</div>
+                   </div>
+                   <div class="relative z-0 w-full mb-6 group">
+                       <label
+                           for="description"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                       >
+                           Description
+                       </label>
+                       <textarea
+                           v-model="addProductForm.description"
+                           id="description"
+                           rows="4"
+                           class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           placeholder=" Enter Description "
+                       ></textarea>
+                       <div v-if="errors.description">
+                           {{
+        errors.description
+    }}
+                       </div>
+                   </div>
 
-                <div class="grid md:grid-cols-2 md:gap-6">
+                   <div class="grid md:grid-cols-2 md:gap-6">
 
 
-                    <div class="relative z-0 w-full mb-6 group">
+                       <div class="relative z-0 w-full mb-6 group">
 
-                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Category </label >
-                        <select v-model="addProductForm.category_id" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        >
-                            <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
-                        </select>
+                           <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Category </label >
+                           <select v-model="addProductForm.category_id" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           >
+                               <option v-for="category in categories" :key="category.id" :value="category.id">{{
+        category.name
+    }}</option>
+                           </select>
 
-                        <div v-if="errors.category_id">
-                            {{ errors.category_id }}
-                        </div>
-                    </div>
-                    <div class="relative z-0 w-full mb-6 group">
+                           <div v-if="errors.category_id">
+                               {{
+        errors.category_id
+    }}
+                           </div>
+                       </div>
+                       <div class="relative z-0 w-full mb-6 group">
 
-                        <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Brand </label>
-                        <select  v-model="addProductForm.brand_id" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        >
-                        <option v-for="brand in brands" :key="brand.id" :value="brand.id">{{ brand.name }}</option>
+                           <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Brand </label>
+                           <select  v-model="addProductForm.brand_id" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           >
+                           <option v-for="brand in brands" :key="brand.id" :value="brand.id">{{
+        brand.name
+    }}</option>
 
-                        </select>
-                        <div v-if="errors.brand_id">{{ errors.brand_id }}</div>
-                    </div>
-                </div>
-                <div class="grid md:grid-cols-2 md:gap-6">
-                    <div class="relative z-0 w-full mb-6 group">
-                        <input
-                            v-model="addProductForm.price"
-                            type="number"
-                            name="price"
-                            id="price"
-                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            placeholder=" "
-                        />
-                        <label
-                            for="price"
-                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                            >Price</label
-                        >
-                        <div v-if="errors.price">{{ errors.price }}</div>
-                    </div>
-                    <div class="relative z-0 w-full mb-6 group">
-                        <input
-                            v-model="addProductForm.quantity"
-                            type="number"
-                            name="quantity"
-                            id="quantity"
-                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            placeholder=" "
-                        />
-                        <label
-                            for="quantity"
-                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                            >Quantity</label
-                        >
-                        <div v-if="errors.quantity">{{ errors.quantity }}</div>
-                    </div>
-                </div>
-                <button
-                    type="submit"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                    Submit
-                </button>
-            </form>
-        </el-dialog>
+                           </select>
+                           <div v-if="errors.brand_id">{{
+        errors.brand_id
+    }}</div>
+                       </div>
+                   </div>
+                   <div class="grid md:grid-cols-2 md:gap-6">
+                       <div class="relative z-0 w-full mb-6 group">
+                           <input
+                               v-model="addProductForm.price"
+                               type="number"
+                               name="price"
+                               id="price"
+                               class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                               placeholder=" "
+                           />
+                           <label
+                               for="price"
+                               class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                               >Price</label
+                           >
+                           <div v-if="errors.price">{{
+        errors.price
+    }}</div>
+                       </div>
+                       <div class="relative z-0 w-full mb-6 group">
+                           <input
+                               v-model="addProductForm.quantity"
+                               type="number"
+                               name="quantity"
+                               id="quantity"
+                               class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                               placeholder=" "
+                           />
+                           <label
+                               for="quantity"
+                               class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                               >Quantity</label
+                           >
+                           <div v-if="errors.quantity">{{
+        errors.quantity
+    }}</div>
+                       </div>
+                   </div>
+                   <button
+                       type="submit"
+                       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                   >
+                       Submit
+                   </button>
+               </form>
+           </el-dialog>
 
-        <!-- add product form end -->
-    </AdminLayout>
+           <!-- add product form end -->
+       </AdminLayout>
 </template>
 <script setup>
-import { Head, usePage } from "@inertiajs/vue3";
-import { useForm } from "@inertiajs/vue3";
+import {Head, usePage} from "@inertiajs/vue3";
+import {useForm} from "@inertiajs/vue3";
 import AdminLayout from ".././Components/AdminLayout.vue";
-import { ref } from "vue";
+import {ref} from "vue";
 
 import Swal from "sweetalert2";
 
@@ -609,16 +639,28 @@ const isEditMode = ref(false);
 
 const dialogVisible = ref(false);
 
+
 const openAddModal = () => {
     isAddProduct.value = true;
     dialogVisible.value = true;
     isEditMode.value = false;
 };
-const openEditModal = (product) => {
-    console.log(product);
-    title.value = product.title,
 
-        isEditMode.value = true;
+const editValue = ref([]);
+
+console.log(editValue);
+const openEditModal = (product) => {
+
+    // console.log(product);
+    // editValue.value = {
+    //     title : product.title,
+    //     quantity: product.quantity,
+    //     description: product.description,
+    //     price: product.price,
+    //     category_id: product.category_id,
+    //     brand_id: product.brand_id,
+    // };
+    isEditMode.value = true;
     isAddProduct.value = false;
     dialogVisible.value = true;
 };
