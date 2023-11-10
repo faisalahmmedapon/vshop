@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Frontend\DashboardController;
 
 // user routes start
@@ -46,6 +47,11 @@ Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.
 Route::middleware(['auth','admin','verified'])->prefix('admin')->as('admin.')->group(function () {
 
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+
+    Route::get('/products', [ProductController::class, 'index'])->name('products');
+    Route::get('/product/store', [ProductController::class, 'store'])->name('product.store');
+
+
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
 });

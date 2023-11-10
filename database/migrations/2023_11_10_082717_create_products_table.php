@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('slug');
             $table->integer('quantity');
             $table->longText('description')->nullable();
-            $table->boolean('published')->default(0);
-            $table->boolean('inStock')->default(0);
+            $table->boolean('published')->default(1);
+            $table->boolean('inStock')->default(100);
             $table->decimal('price',10,2)->default(0);
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreignId('bland_id')->references('id')->on('brands')->onDelete('cascade');
+            $table->foreignId('brand_id')->references('id')->on('brands')->onDelete('cascade');
 
             $table->foreignIdFor(User::class,'created_by')->nullable();
             $table->foreignIdFor(User::class,'updated_by')->nullable();
