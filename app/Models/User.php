@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'IsAdmin',
+        'role',
     ];
 
     /**
@@ -44,12 +44,5 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-
-    // User.php
-
-public function IsAdmin()
-{
-    return $this->IsAdmin == 1;
-}
 
 }

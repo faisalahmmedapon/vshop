@@ -21,11 +21,11 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $user = new User();
-        $user->name = "Admin";
-        $user->email = "admin@gmail.com";
-        $user->password = Hash::make("12345678");
-        $user->isAdmin = 1;
-        $user->save();
+        $this->call([
+            UserSeeder::class,
+            AdminSeeder::class,
+        ]);
+
+
     }
 }
