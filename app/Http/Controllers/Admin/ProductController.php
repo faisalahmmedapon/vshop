@@ -30,6 +30,9 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
+
+        // return $request->all();
+
         $rules = [
             'title' => 'required|string|max:255',
             'quantity' => 'required|integer|min:1',
@@ -57,21 +60,19 @@ class ProductController extends Controller
             "brand_id" => $request->brand_id,
         ]);
 
-
         // check if user uploads images
         if ($request->hasFile("product_images")) {
             $productImages = $request->file("product_images");
             foreach ($productImages as $image) {
-                $uniqueName = time()."__".$image->getClientOriginalName();
-                $image->move('product_images', $uniqueName);
+                $uniqueName = 'product__'.time().'__'.$image->getClientOriginalExtension();
+                $image->move('product', $uniqueName);
                 ProductImage::create([
                     'product_id' => $product->id,
-                    'image' => 'product_images/' . $uniqueName,
+                    'image' => 'product/' . $uniqueName,
                 ]);
             }
         }
-
-        return redirect()->route('admin.products')->with('success','Product Create Successfully');
+        // return redirect()->route('admin.products')->with('success','Product Create Successfully');
 
         // $product = Product::create($request->all());
     }
