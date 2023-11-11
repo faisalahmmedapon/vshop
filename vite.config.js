@@ -17,4 +17,7 @@ export default defineConfig({
             },
         }),
     ],
+    compilerOptions: {
+        isCustomElement: (tag) => tag === 'Link',
+      },
 });

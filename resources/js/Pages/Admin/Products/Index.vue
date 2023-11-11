@@ -286,12 +286,12 @@
                                            </th>
                                            <td class="px-4 py-3">
                                                {{
-        product.category_id
+        product.category.name
     }}
                                            </td>
                                            <td class="px-4 py-3">
                                                {{
-        product.brand_id
+        product.brand.name
     }}
                                            </td>
                                            <td class="px-4 py-3">
@@ -323,41 +323,7 @@
                                            <td
                                                class="px-4 py-3 flex items-center justify-end"
                                            >
-                                               <button
-                                                   id="apple-imac-27-dropdown-button"
-                                                   data-dropdown-toggle="apple-imac-27-dropdown"
-                                                   class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
-                                                   type="button"
-                                               >
-                                                   <svg
-                                                       class="w-5 h-5"
-                                                       aria-hidden="true"
-                                                       fill="currentColor"
-                                                       viewbox="0 0 20 20"
-                                                       xmlns="http://www.w3.org/2000/svg"
-                                                   >
-                                                       <path
-                                                           d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"
-                                                       />
-                                                   </svg>
-                                               </button>
-                                               <div
-                                                   id="apple-imac-27-dropdown"
-                                                   class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
-                                               >
-                                                   <ul
-                                                       class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                                       aria-labelledby="apple-imac-27-dropdown-button"
-                                                   >
-                                                       <li>
-                                                           <a
-                                                               href="#"
-                                                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                                               >Show</a
-                                                           >
-                                                       </li>
-                                                       <li>
-                                                           <button
+                                           <button
                                                                @click="
                                                                    openEditModal(
                                                                        product
@@ -367,16 +333,6 @@
                                                            >
                                                                Edit
                                                            </button>
-                                                       </li>
-                                                   </ul>
-                                                   <div class="py-1">
-                                                       <a
-                                                           href="#"
-                                                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                                                           >Delete</a
-                                                       >
-                                                   </div>
-                                               </div>
                                            </td>
                                        </tr>
                                    </tbody>
@@ -494,10 +450,10 @@
                width="30%"
                :before-close="handleClose"
            >
-               <form @submit.prevent="createProduct">
+               <form @submit.prevent="isEditMode ? updateProduct() : createProduct()">
                    <div class="relative z-0 w-full mb-6 group">
                        <input
-                           v-model="addProductForm.title"
+                           v-model="useThisFormForProductCreateOrUpdate.title"
                            type="text"
                            name="title"
                            id="title"
@@ -521,7 +477,7 @@
                            Description
                        </label>
                        <textarea
-                           v-model="addProductForm.description"
+                           v-model="useThisFormForProductCreateOrUpdate.description"
                            id="description"
                            rows="4"
                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -540,7 +496,7 @@
                        <div class="relative z-0 w-full mb-6 group">
 
                            <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Category </label >
-                           <select v-model="addProductForm.category_id" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           <select v-model="useThisFormForProductCreateOrUpdate.category_id" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            >
                                <option v-for="category in categories" :key="category.id" :value="category.id">{{
         category.name
@@ -556,7 +512,7 @@
                        <div class="relative z-0 w-full mb-6 group">
 
                            <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Brand </label>
-                           <select  v-model="addProductForm.brand_id" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           <select  v-model="useThisFormForProductCreateOrUpdate.brand_id" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            >
                            <option v-for="brand in brands" :key="brand.id" :value="brand.id">{{
         brand.name
@@ -571,8 +527,8 @@
                    <div class="grid md:grid-cols-2 md:gap-6">
                        <div class="relative z-0 w-full mb-6 group">
                            <input
-                               v-model="addProductForm.price"
-                               type="number"
+                               v-model="useThisFormForProductCreateOrUpdate.price"
+                               type="text"
                                name="price"
                                id="price"
                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -589,7 +545,7 @@
                        </div>
                        <div class="relative z-0 w-full mb-6 group">
                            <input
-                               v-model="addProductForm.quantity"
+                               v-model="useThisFormForProductCreateOrUpdate.quantity"
                                type="number"
                                name="quantity"
                                id="quantity"
@@ -620,7 +576,7 @@
 </template>
 <script setup>
 import {Head, usePage} from "@inertiajs/vue3";
-import {useForm} from "@inertiajs/vue3";
+import {useForm,router} from "@inertiajs/vue3";
 import AdminLayout from ".././Components/AdminLayout.vue";
 import {ref} from "vue";
 
@@ -634,59 +590,95 @@ defineProps({
 });
 
 // open add modal
-const isAddProduct = ref(false);
 const isEditMode = ref(false);
-
 const dialogVisible = ref(false);
 
-
+// for product create use this code
 const openAddModal = () => {
-    isAddProduct.value = true;
     dialogVisible.value = true;
     isEditMode.value = false;
 };
-
-const editValue = ref([]);
-
-console.log(editValue);
-const openEditModal = (product) => {
-
-    // console.log(product);
-    // editValue.value = {
-    //     title : product.title,
-    //     quantity: product.quantity,
-    //     description: product.description,
-    //     price: product.price,
-    //     category_id: product.category_id,
-    //     brand_id: product.brand_id,
-    // };
-    isEditMode.value = true;
-    isAddProduct.value = false;
-    dialogVisible.value = true;
-};
-
-const addProductForm = useForm({
+const useThisFormForProductCreateOrUpdate = useForm({
+    id: "",
     title: "",
     quantity: "",
     description: "",
     price: "",
     category_id: "",
     brand_id: "",
-});
+    images: [],
 
-const createProduct = () => {
-    addProductForm.post("/admin/product/store");
-    dialogVisible.value = false;
-    addProductForm.reset();
-    Swal.fire({
-        toast: true,
-        icon: "success",
-        position: "top-end",
-        text: "Product created successfully",
-        showCloseButton: true,
-        showConfirmButton: false,
-        timer: 5000,
+});
+const createProduct = async () => {
+
+    try {
+
+            // Append each image file to form data
+    useThisFormForProductCreateOrUpdate.images.forEach((image, index) => {
+      formData.append(`images[${index}]`, image);
     });
+
+        await router.post("/admin/product/store",useThisFormForProductCreateOrUpdate,{
+            onSuccess: (page)=>{
+                dialogVisible.value = false;
+                useThisFormForProductCreateOrUpdate.reset();
+                Swal.fire({
+                    toast: true,
+                    icon: "success",
+                    position: "top-end",
+                    text: "Product created successfully",
+                    showCloseButton: true,
+                    showConfirmButton: false,
+                    timer: 5000,
+                });
+            }
+        });
+    }catch (e) {
+        console.log(e);
+    }
+
 };
+
+
+// for product update use this code
+
+const openEditModal = (product) => {
+
+    isEditMode.value = true;
+    dialogVisible.value = true;
+
+    useThisFormForProductCreateOrUpdate.id = product.id;
+    useThisFormForProductCreateOrUpdate.title = product.title;
+    useThisFormForProductCreateOrUpdate.quantity = product.quantity;
+    useThisFormForProductCreateOrUpdate.description = product.description;
+    useThisFormForProductCreateOrUpdate.price = product.price;
+    useThisFormForProductCreateOrUpdate.category_id = product.category_id;
+    useThisFormForProductCreateOrUpdate.brand_id = product.brand_id;
+};
+
+
+const updateProduct = async () => {
+
+try {
+    await router.post("/admin/product/update/" + useThisFormForProductCreateOrUpdate.id,useThisFormForProductCreateOrUpdate,{
+        onSuccess: (page)=>{
+            dialogVisible.value = false;
+            useThisFormForProductCreateOrUpdate.reset();
+            Swal.fire({
+                toast: true,
+                icon: "success",
+                position: "top-end",
+                text: "Product updated successfully",
+                showCloseButton: true,
+                showConfirmButton: false,
+                timer: 5000,
+            });
+        }
+    });
+}catch (e) {
+    console.log(e);
+}
+};
+
 </script>
 <style lang=""></style>

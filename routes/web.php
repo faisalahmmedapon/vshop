@@ -50,6 +50,7 @@ Route::middleware(['auth','admin','verified'])->prefix('admin')->as('admin.')->g
 
     Route::get('/products', [ProductController::class, 'index'])->name('products');
     Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+    Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
 
 
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
