@@ -283,7 +283,7 @@
                                             scope="row"
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                         >
-                                            {{ product.title }}
+                                            {{ truncateString(product.title,20 )}}
                                         </th>
                                         <td class="px-4 py-3 grid" style="display: flex;">
                                             <img style="width: 30px; height: 20px; margin:1px;cursor:pointer" v-for="pimage in product.product_images" :key="pimage.id" :src="`/${pimage.image}`"  />
@@ -778,6 +778,13 @@ const handleFileChange = (event) => {
 //     dialogVisible.value = true;
 // };
 //
+
+// make this function for text limit
+const truncateString = (str, maxLength) => {
+  return str.length > maxLength ? str.slice(0, maxLength) + '...' : str;
+};
+
+
 </script>
 <style>
 .demo-image__error .image-slot {
