@@ -8,18 +8,11 @@ use Inertia\Inertia;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Frontend\DashboardController;
+use App\Http\Controllers\User\UserController;
 
 // user routes start
 
-
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/', [UserController::class, 'index'])->name('user.dashboard');
 
 
 /*User dashboard*/
@@ -39,8 +32,8 @@ Route::group(['middleware' => ['auth', 'user','verified']], function () {
 // admin routes start
 
 
-Route::get('/admin/login', [AdminAuthController::class, 'index'])->name('admin.login.from');
-Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
+// Route::get('/admin/login', [AdminAuthController::class, 'index'])->name('admin.login.from');
+// Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
 
 
 // localhost:8080/admin
@@ -56,7 +49,6 @@ Route::middleware(['auth','admin','verified'])->prefix('admin')->as('admin.')->g
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
 });
-
 
 
 

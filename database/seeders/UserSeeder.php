@@ -15,10 +15,10 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $user = new User();
-        $user->name = "User";
-        $user->email = "user@gmail.com";
+        $user->name = "Admin";
+        $user->email = "admin@gmail.com";
         $user->password = Hash::make("12345678");
-        $user->role = 2;
+        $user->usertype= 1;
         $user->save();
     }
 }
