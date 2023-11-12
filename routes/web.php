@@ -12,7 +12,7 @@ use App\Http\Controllers\User\UserController;
 
 // user routes start
 
-Route::get('/', [UserController::class, 'index'])->name('user.dashboard');
+Route::get('/', [UserController::class, 'index'])->name('home');
 
 
 /*User dashboard*/
@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth', 'user','verified']], function () {
 
 // Route::get('/admin/login', [AdminAuthController::class, 'index'])->name('admin.login.from');
 // Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
+    // Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
 
 // localhost:8080/admin
@@ -46,7 +47,6 @@ Route::middleware(['auth','admin','verified'])->prefix('admin')->as('admin.')->g
     Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
 
 
-    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
 });
 

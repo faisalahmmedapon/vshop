@@ -608,7 +608,17 @@
              class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
              id="dropdown"
            >
-             <div class="py-3 px-4">
+           <div class="py-3 px-4" v-if="$page.props.auth.user">
+               <span
+                 class="block text-sm font-semibold text-gray-900 dark:text-white"
+                 >{{ $page.props.auth.user.name }}</span
+               >
+               <span
+                 class="block text-sm text-gray-900 truncate dark:text-white"
+                 >{{ $page.props.auth.user.email }}</span
+               >
+             </div>
+             <div class="py-3 px-4" v-else>
                <span
                  class="block text-sm font-semibold text-gray-900 dark:text-white"
                  >Neil Sims</span
@@ -720,7 +730,7 @@
              >
                <li>
 
-                 <Link :href="route('admin.logout')" method="post" as="button" type="button"
+                 <Link :href="route('logout')" method="post" as="button" type="button"
                    class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                    >Sign out</Link>
                </li>
