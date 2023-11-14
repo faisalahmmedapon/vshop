@@ -6,12 +6,12 @@
 
     <!-- navbar end-->
 
-    <!-- hero session start -->
-    <Hero></Hero>
-    <!-- hero session end -->
+
 
     <!-- body main part start -->
-    <slot></slot>
+        <div class="mt-9">
+            <slot></slot>
+        </div>
     <!-- body main part end -->
 
     <!-- footer start -->
@@ -22,7 +22,6 @@
 </template>
 <script setup>
 import Nav from "./Nav.vue";
-import Hero from "./Hero.vue";
 import Footer from "./Footer.vue";
 
 import { onMounted } from "vue";
@@ -56,4 +55,6 @@ onMounted(() => {
 });
 </script>
 
-<style lang=""></style>
+<style>
+
+</style>

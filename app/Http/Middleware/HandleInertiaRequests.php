@@ -54,6 +54,7 @@ class HandleInertiaRequests extends Middleware
             'laravelVersion' => Application::VERSION,
             'phpVersion' => PHP_VERSION,
 
+            'total' => total(),
 
         ];
     }

@@ -1,11 +1,16 @@
 <template lang="">
     <UserLayout>
         <Head title="Home" />
+
+        <!-- hero session start -->
+        <Hero></Hero>
+        <!-- hero session end -->
+
         <!-- body main part start -->
 
-        <div class="bg-white">
+        <div class="">
             <div
-                class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8"
+                class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-15 lg:max-w-7xl lg:px-8"
             >
                 <h2 class="text-2xl font-bold tracking-tight text-gray-900">
                     Order Latest Product
@@ -17,7 +22,8 @@
                     <div
                         v-for="product in products"
                         :key="product.id"
-                        class="group relative"
+                        class="group relative add-to-cart"
+                        @click="addToCart(product)"
                     >
                         <div
                             class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80"
@@ -57,6 +63,11 @@
                     </div>
                 </div>
             </div>
+
+            <div class="flex justify-center ...">
+                <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Load More Products</button>
+
+            </div>
         </div>
 
         <!-- body main part end -->
@@ -65,11 +76,43 @@
 
 <script setup>
 import UserLayout from "./Layouts/UserLayout.vue";
-import { Head } from "@inertiajs/vue3";
+import Hero from "./Layouts/Hero.vue";
+
+import Swal from "sweetalert2";
+import { router } from "@inertiajs/vue3";
+import { onMounted, ref, watch, computed } from "vue";
+import { Head, Link, usePage } from "@inertiajs/vue3";
 
 defineProps({
     products: Array,
 });
+
+const addToCart = async (product) => {
+    try {
+        const response = await axios.get("/add-to-cart/" + product.id);
+
+        // Assuming the response contains relevant data
+        // console.log(response.data);
+        Swal.fire({
+            toast: true,
+            icon: "success",
+            position: "top-end",
+            text: "Add to cart successfully",
+            showCloseButton: true,
+            showConfirmButton: false,
+            timer: 5000,
+        });
+        // You can also create a computed property if you want to perform some computations on the total
+        const total = usePage().props.total;
+        usePage().props.total = total + 1;
+    } catch (error) {
+        console.error("Error adding to cart:", error.message);
+    }
+};
 </script>
 
-<style></style>
+<style>
+.add-to-cart {
+    cursor: pointer;
+}
+</style>

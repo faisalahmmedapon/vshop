@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
+        remove_cart();
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
