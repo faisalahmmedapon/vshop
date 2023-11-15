@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\User\AddToCartController;
 use App\Http\Controllers\User\UserController;
+use App\Models\User\CategoryProducts;
 
 // user routes start
 
@@ -33,6 +34,12 @@ Route::get('/update-cart-views', [AddToCartController::class, 'updateCartViews']
 Route::get('/add-to-cart-increment/{id}', [AddToCartController::class, 'addToCartIncrement'])->name('addToCartIncrement');
 Route::get('/add-to-cart-decrement/{id}', [AddToCartController::class, 'addToCartDecrement'])->name('addToCartDecrement');
 Route::get('/add-to-cart-remove/{id}', [AddToCartController::class, 'addToCartRemove'])->name('addToCartRemove');
+Route::get('/remove-all-from-cart', [AddToCartController::class, 'removeAllFormCart'])->name('removeAllFormCart');
+
+
+// search product by category
+Route::get('/{slug}', [CategoryProducts::class, 'category'])->name('category');
+
 
 
 // user routes end

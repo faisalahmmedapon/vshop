@@ -48,7 +48,20 @@ class AddToCartController extends Controller
             $cartItems = json_decode($cartItems, true) ?? [];
 
             // Add the new item to the cart array
-            $cartItems[] = ['user_id' => '', 'product_id' => $productId, 'quantity' => $quantity];
+            $cartItems[] = [
+                'user_id' => '',
+                'product_id' => $productId,
+                'quantity' => $quantity,
+                'expiration_time' => now()->addMinutes(1)->timestamp,
+            ];
+
+
+
+            // Filter out items that have expired
+            $cartItems = array_filter($cartItems, function ($item) {
+                return now()->timestamp <= $item['expiration_time'];
+            });
+
 
             // Encode the array back to JSON and store it in the cookie
             Cookie::queue('cart_items', json_encode($cartItems));
@@ -129,4 +142,22 @@ class AddToCartController extends Controller
             'carts' => $carts,
         ]);
     }
+
+
+
+
+    public function removeAllFormCart()
+
+    {
+        if (!auth()->user()) {
+            // Clear the cart cookie
+            Cookie::queue(Cookie::forget('cart_items'));
+        } else {
+            $carts = Cart::where('user_id', auth()->user()->id)->get();
+            foreach ($carts as $cart) {
+                $cart->delete();
+            }
+        }
+    }
+
 }

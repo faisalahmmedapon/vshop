@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Category;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +56,7 @@ class HandleInertiaRequests extends Middleware
             'phpVersion' => PHP_VERSION,
 
             'total' => total(),
+            'categories' => Category::all(),
 
         ];
     }

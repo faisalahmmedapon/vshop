@@ -13,18 +13,25 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
+
         $categories = [
             [
-                "name" => "Laptop",
+                "name" => "Smartphones",
             ],
             [
-                "name" => "Computer",
+                "name" => "Laptops",
             ],
             [
-                "name" => "Watch",
+                "name" => "Smartwatches",
             ],
             [
-                "name" => "Phone",
+                "name" => "Cameras",
+            ],
+            [
+                "name" => "Fitness",
+            ],
+            [
+                "name" => "Health & Fitness",
             ],
         ];
 

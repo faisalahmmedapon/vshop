@@ -1,10 +1,6 @@
 <template lang="">
     <UserLayout>
-        <Head title="Home" />
-
-        <!-- hero session start -->
-        <Hero></Hero>
-        <!-- hero session end -->
+        <Head :title="category_products.name" />
 
         <!-- body main part start -->
 
@@ -13,14 +9,14 @@
                 class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-15 lg:max-w-7xl lg:px-8"
             >
                 <h2 class="text-2xl font-bold tracking-tight text-gray-900">
-                    Order Latest Product
+                    {{ category_products.name }}
                 </h2>
 
-                <div
+                <div v-if="category_products.products.length > 0"
                     class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
                 >
                     <div
-                        v-for="product in products"
+                        v-for="product in category_products.products"
                         :key="product.id"
                         class="group relative add-to-cart"
                         @click="addToCart(product)"
@@ -41,6 +37,7 @@
                                 class="h-full w-full object-cover object-center lg:h-full lg:w-full"
                             />
                         </div>
+
                         <div class="mt-4 flex justify-between">
                             <div>
                                 <h3 class="text-sm text-gray-700">
@@ -55,6 +52,18 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="py-16 flex justify-center" v-else>
+                        <div>
+                            <h4 class="text-3xl font-bold text-red-500">
+                            "Items Not Found !!! Please try another Items"
+                        </h4>
+                        <p class="mt-4 text-gray-600">
+                            Explore our amazing products and add them to your
+                            cart!
+                        </p>
+                        </div>
+                    </div>
             </div>
 
             <div class="flex justify-center">
@@ -67,17 +76,16 @@
 </template>
 
 <script setup>
+import { Head, Link, usePage } from '@inertiajs/vue3';
 import UserLayout from "./Layouts/UserLayout.vue";
-import Hero from "./Layouts/Hero.vue";
-
 import Swal from "sweetalert2";
 import { router } from "@inertiajs/vue3";
 import { onMounted, ref, watch, computed } from "vue";
-import { Head, Link, usePage } from "@inertiajs/vue3";
 
 defineProps({
-    products: Array,
+    category_products: Object,
 });
+
 
 const addToCart = async (product) => {
     try {
