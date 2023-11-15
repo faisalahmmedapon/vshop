@@ -2,9 +2,8 @@
     <UserLayout>
         <Head :title="category_products.name" />
 
-        <!-- body main part start -->
 
-        <div class="">
+<div class="">
             <div
                 class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-15 lg:max-w-7xl lg:px-8"
             >
@@ -38,22 +37,24 @@
                             />
                         </div>
 
-                        <div class="mt-4 flex justify-between">
+<div class="mt-4 flex justify-between">
                             <div>
                                 <h3 class="text-sm text-gray-700">
                                         {{ product.title }}
                                 </h3>
                             </div>
                         </div>
-                        <div class="mt-4 flex justify-between">
+<div class="mt-4 flex justify-between">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">{{ product.category.name }}</span>
+
                             <span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">${{ product.price }}</span>
                             <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">{{ product.brand.name }}</span>
-                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">{{ product.category.name }}</span>
+
                         </div>
                     </div>
                 </div>
 
-                <div class="py-16 flex justify-center" v-else>
+<div class="py-16 flex justify-center" v-else>
                         <div>
                             <h4 class="text-3xl font-bold text-red-500">
                             "Items Not Found !!! Please try another Items"
@@ -66,9 +67,6 @@
                     </div>
             </div>
 
-            <div class="flex justify-center">
-                <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Load More Products</button>
-            </div>
         </div>
 
         <!-- body main part end -->
@@ -82,9 +80,9 @@ import Swal from "sweetalert2";
 import { router } from "@inertiajs/vue3";
 import { onMounted, ref, watch, computed } from "vue";
 
-defineProps({
-    category_products: Object,
-});
+
+const category_products = usePage().props.category_products;
+
 
 
 const addToCart = async (product) => {
@@ -115,4 +113,4 @@ const addToCart = async (product) => {
 .add-to-cart {
     cursor: pointer;
 }
-</style>
+</style> -->

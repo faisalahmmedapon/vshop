@@ -38,7 +38,7 @@ Route::get('/remove-all-from-cart', [AddToCartController::class, 'removeAllFormC
 
 
 // search product by category
-Route::get('/{slug}', [CategoryProducts::class, 'category'])->name('category');
+Route::get('/products/{slug}', [CategoryProducts::class, 'category'])->name('category');
 
 
 
