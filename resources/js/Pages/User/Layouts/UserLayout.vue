@@ -9,7 +9,7 @@
 
 
     <!-- body main part start -->
-        <div class="mt-9">
+        <div class="py-12">
             <slot></slot>
         </div>
     <!-- body main part end -->
@@ -55,6 +55,4 @@ onMounted(() => {
 });
 </script>
 
-<style>
-
-</style>
+<style></style>

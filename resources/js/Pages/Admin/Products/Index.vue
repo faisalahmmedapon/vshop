@@ -1107,7 +1107,6 @@
             v-model="dialogVisible"
             :title="isEditMode ? 'Edit Product' : 'Add Product'"
             width="30%"
-            :before-close="handleClose"
         >
             <form
                 @submit.prevent="isEditMode ? updateProduct() : createProduct()"

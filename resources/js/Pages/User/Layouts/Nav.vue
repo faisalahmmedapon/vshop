@@ -55,31 +55,19 @@
                 <!-- Dropdown menu -->
                 <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
                     id="user-dropdown">
-                    <div class="px-4 py-3" v-if="$page.props.auth.user">
+                    <!-- <div class="px-4 py-3" v-if="$page.props.auth.user">
                         <span class="block text-sm text-gray-900 dark:text-white">{{ $page.props.auth.user.name }}</span>
                         <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{
                             $page.props.auth.user.email }}</span>
-                    </div>
-                    <div class="px-4 py-3" v-else>
-                        <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-                        <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
-                    </div>
+                    </div> -->
+
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
                             <Link :href="route('dashboard')"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                             Dashboard</Link>
                         </li>
-                        <li>
-                            <Link href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                            Settings</Link>
-                        </li>
-                        <li>
-                            <Link href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                            Earnings</Link>
-                        </li>
+
                         <li>
                             <Link :href="route('logout')" method="post" as="button"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
