@@ -13,6 +13,7 @@ class BrandController extends Controller
         $brands = Brand::all();
         return Inertia::render("Admin/Brands/Index",[
             "brands"=> $brands,
+        ]);
        }
        public function store(Request $request){
 
