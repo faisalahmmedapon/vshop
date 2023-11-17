@@ -6,6 +6,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\User\AddToCartController;
@@ -37,9 +39,10 @@ Route::get('/add-to-cart-remove/{id}', [AddToCartController::class, 'addToCartRe
 Route::get('/remove-all-from-cart', [AddToCartController::class, 'removeAllFormCart'])->name('removeAllFormCart');
 
 
+
 // search product by category
 Route::get('/products/{slug}', [CategoryProducts::class, 'category'])->name('category');
-
+Route::get('/product-details/{slug}', [DashboardController::class, 'details'])->name('product_detail');
 
 
 // user routes end
@@ -55,11 +58,55 @@ Route::get('/products/{slug}', [CategoryProducts::class, 'category'])->name('cat
 // localhost:8080/admin
 Route::middleware(['auth', 'admin', 'verified'])->prefix('admin')->as('admin.')->group(function () {
 
+
+    // admin user can got admin/dashboard
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
-    Route::get('/products', [ProductController::class, 'index'])->name('products');
-    Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
-    Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+// use this route for category management
+    Route::controller(CategoryController::class)->group(function () {
+
+        Route::get('/categories', 'index')->name('categories');
+
+        Route::prefix('category')->as('category.')->group(function () {
+            Route::post('/store', 'store')->name('store');
+            Route::post('/update/{id}', 'update')->name('update');
+            Route::get('/delete/{id}', 'destroy')->name('destroy');
+            Route::get('/show/{id}', 'show')->name('show');
+        });
+
+    });
+
+// use this route for brand management
+    Route::controller(BrandController::class)->group(function () {
+
+        Route::get('/brands', 'index')->name('brands');
+
+        Route::prefix('brand')->as('brand.')->group(function () {
+            Route::post('/store', 'store')->name('store');
+            Route::post('/update/{id}', 'update')->name('update');
+            Route::get('/delete/{id}', 'destroy')->name('destroy');
+            Route::get('/show/{id}', 'show')->name('show');
+        });
+
+    });
+
+
+    Route::controller(ProductController::class)->group(function () {
+
+        Route::get('/products', 'index')->name('products');
+
+        Route::as('product.')->group(function () {
+            Route::post('/product/store', 'store')->name('store');
+            Route::post('/product/update/{id}', 'update')->name('update');
+            Route::get('/product/delete/{id}', 'destroy')->name('destroy');
+            Route::get('/product/show/{id}', 'show')->name('show');
+            Route::get('/remove/product/image/{id}', 'remove_image')->name('remove');
+        });
+
+    });
+
+
+
 });
 
 

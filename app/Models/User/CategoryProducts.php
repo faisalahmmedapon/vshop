@@ -15,7 +15,7 @@ class CategoryProducts extends Model
     public function category($slug){
 
         $category_products = Category::with('products','products.brand','products.category','products.product_images',)->where('slug',$slug)->first();
-        return Inertia::render("User/CategoryProducts", [
+        return Inertia::render("User/Category_Products", [
             "category_products"=> $category_products
         ]);
 

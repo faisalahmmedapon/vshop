@@ -1,33 +1,28 @@
 <template lang="">
     <UserLayout>
-        <Head title="Home" />
-
-        <!-- hero session start -->
-        <Hero></Hero>
-        <!-- hero session end -->
-
-        <!-- body main part start -->
+        <Head :title="category_products.name" />
 
         <div class="">
             <div
                 class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-15 lg:max-w-7xl lg:px-8"
             >
                 <h2 class="text-2xl font-bold tracking-tight text-gray-900">
-                    Just For You
+                    {{ category_products.name }}
                 </h2>
 
                 <div
+                    v-if="category_products.products.length > 0"
                     class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
                 >
                     <div
-                        v-for="product in products"
+                        v-for="product in category_products.products"
                         :key="product.id"
                         class="group relative add-to-cart"
                     >
                         <div
                             class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
                         >
-                            <Link :href="route('product_detail',product.slug)">
+                        <Link :href="route('product_detail',product.slug)">
                                 <img
                                     v-if="product.product_images.length > 0"
                                     :src="`/${product.product_images[0].image}`"
@@ -47,6 +42,7 @@
                                 </h3>
 
                                 <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
                                         <div class="flex items-center">
                                             <svg
                                                 aria-hidden="true"
@@ -103,6 +99,7 @@
                                                 >5.0</span
                                             >
                                         </div>
+                                    </div>
                                     <div
                                         @click="addToCart(product)"
                                         class="text-black bg-white-700 hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-1 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -139,53 +136,53 @@
                                 <div class="mt-4 flex justify-between">
                                     <span
                                         class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300"
-                                        >C: {{ product.category.name }}</span
                                     >
-                                    <!-- <span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">${{ product.price }}</span> -->
+                                        C: {{ product.category.name }}
+                                    </span>
                                     <span
                                         class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"
-                                        >B: {{ product.brand.name }}</span
+                                    >
+                                        B: {{ product.brand.name }}</span
                                     >
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="flex justify-center">
-                <button
-                    type="button"
-                    class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                >
-                    Load More Products
-                </button>
+                <div class="py-16 flex justify-center" v-else>
+                    <div>
+                        <h4 class="text-3xl font-bold text-red-500">
+                            "Items Not Found !!! Please try another Items"
+                        </h4>
+                        <p class="mt-4 text-gray-600">
+                            Explore our amazing products and add them to your
+                            cart!
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <!-- body main part end -->
     </UserLayout>
 </template>
 
 <script setup>
+import { Head, Link, usePage } from "@inertiajs/vue3";
 import UserLayout from "./Layouts/UserLayout.vue";
-import Hero from "./Layouts/Hero.vue";
-
 import Swal from "sweetalert2";
 import { router } from "@inertiajs/vue3";
-import { onMounted, ref, watch, computed } from "vue";
-import { Head, Link, usePage } from "@inertiajs/vue3";
+
 
 defineProps({
-    products: Array,
+    category_products : Array,
 });
+
+
 
 const addToCart = async (product) => {
     try {
-        const response = await axios.get("/add-to-cart/" + product.id);
+        const response = await router.get("/add-to-cart/" + product.id);
 
-        // Assuming the response contains relevant data
-        // console.log(response.data);
         Swal.fire({
             toast: true,
             icon: "success",

@@ -53,69 +53,43 @@
                <span class="ml-3">Dashboard</span>
              </Link>
            </li>
+
            <li>
-             <button
-               type="button"
-               class="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-               aria-controls="dropdown-pages"
-               data-collapse-toggle="dropdown-pages"
+             <Link
+               :href="route('admin.categories')"
+               :active="route().current('admin.categories')"
+               class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
              >
-               <svg
-                 aria-hidden="true"
-                 class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                 fill="currentColor"
-                 viewBox="0 0 20 20"
-                 xmlns="http://www.w3.org/2000/svg"
-               >
-                 <path
-                   fill-rule="evenodd"
-                   d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
-                   clip-rule="evenodd"
-                 ></path>
-               </svg>
-               <span class="flex-1 ml-3 text-left whitespace-nowrap"
-                 >Pages</span
-               >
-               <svg
-                 aria-hidden="true"
-                 class="w-6 h-6"
-                 fill="currentColor"
-                 viewBox="0 0 20 20"
-                 xmlns="http://www.w3.org/2000/svg"
-               >
-                 <path
-                   fill-rule="evenodd"
-                   d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                   clip-rule="evenodd"
-                 ></path>
-               </svg>
-             </button>
-             <ul id="dropdown-pages" class="hidden py-2 space-y-2">
-               <li>
-                 <Link
-                   :href="route('admin.products')"
-                   class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                   >Products</Link>
-               </li>
-               <li>
-                 <Link
-                   href="#"
-                   class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                   >Categories</Link>
-               </li>
-               <li>
-                 <Link
-                   href="#"
-                   class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                   >Brands</Link>
-               </li>
-               <li>
-                 <Link
-                   href="#"
-                   class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                   >Sale</Link>
-               </li>
-             </ul>
+             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+</svg>
+
+               <span class="ml-3">Categories</span>
+             </Link>
+             <Link
+               :href="route('admin.brands')"
+               :active="route().current('admin.brands')"
+               class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+             >
+             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+</svg>
+
+
+               <span class="ml-3">Brands</span>
+             </Link>
+             <Link
+               :href="route('admin.products')"
+               :active="route().current('admin.products')"
+               class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+             >
+             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.75c0 .415.336.75.75.75z" />
+</svg>
+
+               <span class="ml-3">Products</span>
+             </Link>
            </li>
 
            </ul>

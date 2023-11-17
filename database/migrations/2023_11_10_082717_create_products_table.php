@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->longText('description')->nullable();
             $table->boolean('published')->default(0);
-            $table->boolean('inStock')->default(0);
+            $table->integer('inStock')->default(0);
             $table->decimal('price',10,2)->default(0);
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreignId('brand_id')->references('id')->on('brands')->onDelete('cascade');

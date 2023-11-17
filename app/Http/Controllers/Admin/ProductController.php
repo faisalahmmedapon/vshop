@@ -54,6 +54,7 @@ class ProductController extends Controller
         $product = Product::create([
             "title" => $request->title,
             "quantity" => $request->quantity,
+            "inStock" => $request->quantity,
             "description" => $request->description,
             "price" => $request->price,
             "category_id" => $request->category_id,
@@ -64,8 +65,8 @@ class ProductController extends Controller
         if ($request->hasFile("product_images")) {
             $productImages = $request->file("product_images");
             foreach ($productImages as $image) {
-                $uniqueName = 'product__'.time().'__'.$image->getClientOriginalExtension();
-                $image->move('product', $uniqueName);
+                $uniqueName = 'product__'.time().'__product_images.'.$image->getClientOriginalExtension();
+                $image->move('product/', $uniqueName);
                 ProductImage::create([
                     'product_id' => $product->id,
                     'image' => 'product/' . $uniqueName,
@@ -101,6 +102,7 @@ class ProductController extends Controller
         $product->update([
             "title" => $request->title,
             "quantity" => $request->quantity,
+            "inStock" => $request->quantity,
             "description" => $request->description,
             "price" => $request->price,
             "category_id" => $request->category_id,
@@ -112,11 +114,11 @@ class ProductController extends Controller
         if ($request->hasFile("product_images")) {
             $productImages = $request->file("product_images");
             foreach ($productImages as $image) {
-                $uniqueName = time()."__".$image->getClientOriginalName();
-                $image->move('product_images', $uniqueName);
+                $uniqueName = 'product__'.time().'__product_images.'.$image->getClientOriginalExtension();
+                $image->move('product/', $uniqueName);
                 ProductImage::create([
                     'product_id' => $product->id,
-                    'image' => 'product_images/' . $uniqueName,
+                    'image' => 'product/' . $uniqueName,
                 ]);
             }
         }
@@ -125,4 +127,37 @@ class ProductController extends Controller
 
         // $product = Product::create($request->all());
     }
+
+
+        public function show($id){
+            $product = Product::with('category','brand','product_images')->findOrFail($id);
+            $categories = Category::all();
+            $brands = Brand::all();
+            return Inertia::render('Admin/Products/Show',[
+                'product'=> $product,
+                "categories" => $categories,
+                "brands" => $brands,
+            ]);
+        }
+
+
+        public function destroy($id){
+            $product = Product::with('product_images')->findOrFail($id);
+            foreach ($product->product_images as $images) {
+                @unlink($images->image);
+            }
+
+            $product->delete();
+        }
+
+        public function remove_image($id){
+            $product = ProductImage::findOrFail($id);
+            @unlink($product->image);
+            $product->delete();
+
+            return redirect()->route('admin.products')->with('success','products');
+
+        }
+
+
 }
