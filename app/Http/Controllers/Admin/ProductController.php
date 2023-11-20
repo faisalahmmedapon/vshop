@@ -152,8 +152,11 @@ class ProductController extends Controller
 
         public function remove_image($id){
             $product = ProductImage::findOrFail($id);
-            @unlink($product->image);
-            $product->delete();
+
+            if ($product->image != 'product/product__1700149702__product_images.jpg'){
+                @unlink($product->image);
+                $product->delete();
+            }
 
             return redirect()->route('admin.products')->with('success','products');
 

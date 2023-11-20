@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <!-- navbar -->
 
     <Nav></Nav>

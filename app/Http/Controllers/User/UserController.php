@@ -13,7 +13,7 @@ class UserController extends Controller
 {
 
     public function index(){
-        $products = Product::with("brand","category","product_images")->latest('id')->limit(10)->get();
+        $products = Product::with("brand","category","product_images")->latest('id')->paginate(12);
         return Inertia::render('User/Index',[
             'products'=> $products,
         ]);

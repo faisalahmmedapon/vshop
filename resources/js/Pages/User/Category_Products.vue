@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <UserLayout>
         <Head :title="category_products.name" />
 
@@ -38,7 +38,7 @@
                             </Link>
                             <div class="px-5 pb-5">
                                 <h3 class="text-sm text-gray-700">
-                                    {{ product.title }}
+                                    {{ truncateString( product.title, 90 ) }}
                                 </h3>
 
                                 <div class="flex items-center justify-between">
@@ -174,7 +174,7 @@ import { router } from "@inertiajs/vue3";
 
 
 defineProps({
-    category_products : Array,
+    category_products : Object,
 });
 
 
@@ -199,6 +199,14 @@ const addToCart = async (product) => {
         console.error("Error adding to cart:", error.message);
     }
 };
+
+
+
+// make this function for text limit
+const truncateString = (str, maxLength) => {
+    return str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
+};
+
 </script>
 
 <style>

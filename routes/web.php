@@ -109,7 +109,14 @@ Route::middleware(['auth', 'admin', 'verified'])->prefix('admin')->as('admin.')-
 
 });
 
+Route::fallback(function (){
+    return '404 page';
+});
 
 
 
 require __DIR__ . '/auth.php';
+
+
+
+

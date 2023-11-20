@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <AdminLayout>
         <Head title="Products" />
 
@@ -49,7 +49,7 @@
                                                                 <label for="checkbox-all" class="sr-only">checkbox</label>
                                                             </div>
                                                         </th>
-                                                        <th scope="col" class="px-4 py-3">Product</th>
+<!--                                                        <th scope="col" class="px-4 py-3">Product</th>-->
                                                         <th scope="col" class="px-4 py-3">Category</th>
                                                         <th scope="col" class="px-4 py-3">Brand</th>
                                                         <th scope="col" class="px-4 py-3">Stock</th>
@@ -79,7 +79,7 @@
                                                             <img v-else class="w-auto h-8 mr-3"
                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQulVpB9YDxnnJBgPdrm5Rc5x6xmJH0xO1FYihUJpEiDSvHEOgSBSHnADEC-NLfeIQ-vos&usqp=CAU"
                                 :alt="product.title" />
-                                                            {{ truncateString( product.title, 20 ) }}
+<!--                                                            {{ truncateString( product.title, 20 ) }}-->
                                                         </th>
                                                         <td class="px-4 py-2">
                                                             <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">{{ product.category.name}}</span>

@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <UserLayout>
         <Head title="Home" />
 
@@ -43,7 +43,7 @@
                             </Link>
                             <div class="px-5 pb-5">
                                 <h3 class="text-sm text-gray-700">
-                                    {{ product.title }}
+                                    {{ truncateString( product.title, 90 ) }}
                                 </h3>
 
                                 <div class="flex items-center justify-between">
@@ -153,14 +153,14 @@
                 </div>
             </div>
 
-            <div class="flex justify-center">
-                <button
-                    type="button"
-                    class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                >
-                    Load More Products
-                </button>
-            </div>
+<!--            <div class="flex justify-center">-->
+<!--                <button-->
+<!--                    type="button"-->
+<!--                    class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"-->
+<!--                >-->
+<!--                    Load More Products-->
+<!--                </button>-->
+<!--            </div>-->
         </div>
 
         <!-- body main part end -->
@@ -172,13 +172,18 @@ import UserLayout from "./Layouts/UserLayout.vue";
 import Hero from "./Layouts/Hero.vue";
 
 import Swal from "sweetalert2";
-import { router } from "@inertiajs/vue3";
-import { onMounted, ref, watch, computed } from "vue";
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { Head, Link, usePage } from "@inertiajs/vue3";
 
-defineProps({
-    products: Array,
-});
+// defineProps({
+//     products: Array,
+// });
+
+
+
+
+const products = usePage().props.products.data;
+// console.log(products.data)
 
 const addToCart = async (product) => {
     try {
@@ -202,6 +207,12 @@ const addToCart = async (product) => {
         console.error("Error adding to cart:", error.message);
     }
 };
+
+const truncateString = (str, maxLength) => {
+    return str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
+};
+
+
 </script>
 
 <style>

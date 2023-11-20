@@ -1,15 +1,9 @@
-<template lang="">
+<template>
     <UserLayout>
-        <Head title="Product Details" />
+        <Head title="Product Details"/>
 
-        <!-- hero session start -->
-        <Hero></Hero>
-        <!-- hero session end -->
 
-        <!-- body main part start -->
-        <section
-            class="py-20 overflow-hidden bg-white font-poppins dark:bg-gray-800"
-        >
+        <section class="py-20 overflow-hidden bg-white font-poppins dark:bg-gray-800">
             <div class="max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
                 <div class="flex flex-wrap -mx-4">
                     <div class="w-full px-4 md:w-1/2">
@@ -19,60 +13,32 @@
                                 style="height: 450px"
                             >
                                 <img
-                                    src="https://i.postimg.cc/8zr7BpVj/long-sleeved-t-shirt-isolated-2021-08-26-17-06-58-utc-removebg-preview.png"
-                                    alt=""
+                                    v-if="(product.product_images && product.product_images.length > 0)"
+                                    :src="`${imageUrl}` || `/${product.product_images[0].image}`"
+                                    :alt="product.title"
+                                    class="object-contain w-full h-full"
+                                />
+                                <img
+                                    v-else
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQulVpB9YDxnnJBgPdrm5Rc5x6xmJH0xO1FYihUJpEiDSvHEOgSBSHnADEC-NLfeIQ-vos&usqp=CAU"
+                                    :alt="product.title"
                                     class="object-contain w-full h-full"
                                 />
                             </div>
-                            <div class="flex-wrap hidden md:flex">
-                                <div class="w-1/2 p-2 sm:w-1/4">
-                                    <Link
-                                        href="#"
-                                        class="block border border-blue-100 dark:border-gray-700 dark:hover:border-gray-600 hover:border-blue-300"
-                                    >
-                                        <img
-                                            src="https://i.postimg.cc/8zr7BpVj/long-sleeved-t-shirt-isolated-2021-08-26-17-06-58-utc-removebg-preview.png"
-                                            alt=""
-                                            class="object-cover w-full lg:h-32"
-                                        />
+                            <div class="flex-wrap hidden md:flex" v-if="product.product_images.length > 0">
+                                <div v-for="product_image in product.product_images" class="w-1/2 p-2 sm:w-1/4">
+                                    <Link @click="changeImage(product_image)" class="block border border-blue-100 dark:border-gray-700 dark:hover:border-gray-600 hover:border-blue-300" >
+                                        <img :src="`/${product_image.image}`" :alt="product.title" class="object-cover w-full lg:h-32" />
                                     </Link>
                                 </div>
-                                <div class="w-1/2 p-2 sm:w-1/4">
-                                    <Link
-                                        href="#"
-                                        class="block border border-blue-100 dark:border-transparent dark:hover:border-gray-600 hover:border-blue-300"
-                                    >
-                                        <img
-                                            src="https://i.postimg.cc/8zr7BpVj/long-sleeved-t-shirt-isolated-2021-08-26-17-06-58-utc-removebg-preview.png"
-                                            alt=""
-                                            class="object-cover w-full lg:h-32"
-                                        />
-                                    </Link>
-                                </div>
-                                <div class="w-1/2 p-2 sm:w-1/4">
-                                    <Link
-                                        href="#"
-                                        class="block border border-blue-100 dark:border-transparent dark:hover:border-gray-600 hover:border-blue-300"
-                                    >
-                                        <img
-                                            src="https://i.postimg.cc/8zr7BpVj/long-sleeved-t-shirt-isolated-2021-08-26-17-06-58-utc-removebg-preview.png"
-                                            alt=""
-                                            class="object-cover w-full lg:h-32"
-                                        />
-                                    </Link>
-                                </div>
-                                <div class="w-1/2 p-2 sm:w-1/4">
-                                    <Link
-                                        href="#"
-                                        class="block border border-blue-100 dark:border-transparent dark:hover:border-gray-600 hover:border-blue-300"
-                                    >
-                                        <img
-                                            src="https://i.postimg.cc/8zr7BpVj/long-sleeved-t-shirt-isolated-2021-08-26-17-06-58-utc-removebg-preview.png"
-                                            alt=""
-                                            class="object-cover w-full lg:h-32"
-                                        />
-                                    </Link>
-                                </div>
+                            </div>
+                            <div class="flex-wrap hidden md:flex" v-else>
+                                <img
+
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQulVpB9YDxnnJBgPdrm5Rc5x6xmJH0xO1FYihUJpEiDSvHEOgSBSHnADEC-NLfeIQ-vos&usqp=CAU"
+                                    :alt="product.title"
+                                    class="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                                />
                             </div>
                         </div>
                     </div>
@@ -83,10 +49,10 @@
                             >
                                 <span
                                     class="text-lg font-medium text-rose-500 dark:text-rose-200"
-                                    >New</span
+                                >New</span
                                 >
                                 <h2
-                                    class="max-w-xl mt-2 mb-6 text-xl font-bold dark:text-gray-300 md:text-4xl"
+                                    class="max-w-xl mt-2 mb-6 text-xl font-bold dark:text-gray-300 md:text-2.5xl"
                                 >
                                     {{ product.title }}
                                 </h2>
@@ -101,8 +67,10 @@
                                         >
                                             <path
                                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                                            ></path></svg
-                                        ><svg
+                                            ></path>
+                                        </svg
+                                        >
+                                        <svg
                                             aria-hidden="true"
                                             class="w-5 h-5 text-yellow-400"
                                             fill="currentColor"
@@ -111,8 +79,10 @@
                                         >
                                             <path
                                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                                            ></path></svg
-                                        ><svg
+                                            ></path>
+                                        </svg
+                                        >
+                                        <svg
                                             aria-hidden="true"
                                             class="w-5 h-5 text-yellow-400"
                                             fill="currentColor"
@@ -121,8 +91,10 @@
                                         >
                                             <path
                                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                                            ></path></svg
-                                        ><svg
+                                            ></path>
+                                        </svg
+                                        >
+                                        <svg
                                             aria-hidden="true"
                                             class="w-5 h-5 text-yellow-400"
                                             fill="currentColor"
@@ -131,8 +103,10 @@
                                         >
                                             <path
                                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                                            ></path></svg
-                                        ><svg
+                                            ></path>
+                                        </svg
+                                        >
+                                        <svg
                                             aria-hidden="true"
                                             class="w-5 h-5 text-yellow-400"
                                             fill="currentColor"
@@ -141,10 +115,12 @@
                                         >
                                             <path
                                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                                            ></path></svg
-                                        ><span
+                                            ></path>
+                                        </svg
+                                        >
+                                        <span
                                             class="ml-1 text-gray-500 dark:text-gray-400"
-                                            >5.0</span
+                                        >5.0</span
                                         >
                                     </div>
                                     <Link
@@ -168,7 +144,7 @@
                                         Real time
                                         <span
                                             class="px-2 bg-blue-500 text-gray-50"
-                                            >26</span
+                                        >26</span
                                         >
                                         visitors right now!
                                     </h2>
@@ -187,12 +163,12 @@
                                     </div>
                                 </div>
                                 <p
-                                    class="inline-block text-2xl font-semibold text-gray-700 dark:text-gray-400"
+                                    class="inline-block text-2xl font-semibold text-gray-700 dark:text-gray-400 space-x-2"
                                 >
                                     <span>$ {{ product.price - 2 }}</span>
                                     <span
-                                        class="text-base font-normal text-gray-500 line-through dark:text-gray-400"
-                                        >$ {{ product.price }}</span
+                                        class="font-normal text-gray-500 line-through dark:text-gray-400"
+                                    > <sup>$ {{ product.price }}</sup> </span
                                     >
                                 </p>
                             </div>
@@ -217,8 +193,8 @@
                                     <div class="w-6 h-6 rounded-full bg-sky-400"></div>
                                 </button>
                             </div>
-                        </div> -->
-                            <!-- <div class="pb-6 mb-8 border-b border-gray-300 dark:border-gray-700">
+                        </div>
+                         <div class="pb-6 mb-8 border-b border-gray-300 dark:border-gray-700">
                             <h2 class="mb-2 text-xl font-bold dark:text-gray-400">
                                 Size</h2>
                             <div class="flex flex-wrap -mb-2">
@@ -237,38 +213,38 @@
                             </div>
                         </div> -->
                             <div class="flex flex-wrap items-center">
-                                <div class="mb-4 mr-4 lg:mb-0">
-                                    <div class="w-28">
-                                        <div
-                                            class="relative flex flex-row w-full h-10 bg-transparent rounded-lg"
-                                        >
-                                            <button
-                                                class="w-20 h-full text-gray-600 bg-gray-100 border-r rounded-l outline-none cursor-pointer dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 hover:text-gray-700 dark:bg-gray-900 hover:bg-gray-300"
-                                            >
-                                                <span
-                                                    class="m-auto text-2xl font-thin"
-                                                    >-</span
-                                                >
-                                            </button>
-                                            <input
-                                                type="number"
-                                                class="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-100 outline-none dark:text-gray-400 dark:placeholder-gray-400 dark:bg-gray-900 focus:outline-none text-md hover:text-black"
-                                                placeholder="1"
-                                            />
-                                            <button
-                                                class="w-20 h-full text-gray-600 bg-gray-100 border-l rounded-r outline-none cursor-pointer dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 dark:bg-gray-900 hover:text-gray-700 hover:bg-gray-300"
-                                            >
-                                                <span
-                                                    class="m-auto text-2xl font-thin"
-                                                    >+</span
-                                                >
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+<!--                                <div class="mb-4 mr-4 lg:mb-0">-->
+<!--                                    <div class="w-28">-->
+<!--                                        <div-->
+<!--                                            class="relative flex flex-row w-full h-10 bg-transparent rounded-lg"-->
+<!--                                        >-->
+<!--                                            <button-->
+<!--                                                class="w-20 h-full text-gray-600 bg-gray-100 border-r rounded-l outline-none cursor-pointer dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 hover:text-gray-700 dark:bg-gray-900 hover:bg-gray-300"-->
+<!--                                            >-->
+<!--                                                <span-->
+<!--                                                    class="m-auto text-2xl font-thin"-->
+<!--                                                >-</span-->
+<!--                                                >-->
+<!--                                            </button>-->
+<!--                                            <input-->
+<!--                                                type="number"-->
+<!--                                                class="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-100 outline-none dark:text-gray-400 dark:placeholder-gray-400 dark:bg-gray-900 focus:outline-none text-md hover:text-black"-->
+<!--                                                placeholder="1"-->
+<!--                                            />-->
+<!--                                            <button-->
+<!--                                                class="w-20 h-full text-gray-600 bg-gray-100 border-l rounded-r outline-none cursor-pointer dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 dark:bg-gray-900 hover:text-gray-700 hover:bg-gray-300"-->
+<!--                                            >-->
+<!--                                                <span-->
+<!--                                                    class="m-auto text-2xl font-thin"-->
+<!--                                                >+</span-->
+<!--                                                >-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                                 <div class="mb-4 mr-4 lg:mb-0">
                                     <button
-                                        class="w-full h-10 p-2 mr-4 bg-blue-500 dark:text-gray-200 text-gray-50 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500"
+                                        class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                     >
                                         Buy Now
                                     </button>
@@ -276,8 +252,7 @@
                                 <div class="mb-4 mr-4 lg:mb-0">
                                     <button
                                         @click="addToCart(product)"
-                                        class="flex items-center justify-center w-full h-10 p-2 text-gray-700 border border-gray-300 lg:w-11 hover:text-gray-50 dark:text-gray-200 dark:border-blue-600 hover:bg-blue-600 hover:border-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 dark:hover:border-blue-500 dark:hover:text-gray-300"
-                                    >
+                                        class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
@@ -294,7 +269,7 @@
                                 </div>
                                 <div class="mb-4 lg:mb-0">
                                     <button
-                                        class="flex items-center justify-center w-full h-10 p-2 text-gray-700 border border-gray-300 lg:w-11 hover:text-gray-50 dark:text-gray-200 dark:border-blue-600 hover:bg-blue-600 hover:border-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 dark:hover:border-blue-500 dark:hover:text-gray-300"
+                                        class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -320,10 +295,14 @@
 </template>
 
 <script setup>
-import { Head, Link, usePage } from "@inertiajs/vue3";
 import UserLayout from "./Layouts/UserLayout.vue";
+import {Head, usePage} from "@inertiajs/vue3";
 import Swal from "sweetalert2";
-import { router } from "@inertiajs/vue3";
+import {router} from "@inertiajs/vue3";
+
+import { ref } from 'vue';
+
+const imageUrl = ref('');
 
 defineProps({
     product: Object,
@@ -349,6 +328,19 @@ const addToCart = async (product) => {
         console.error("Error adding to cart:", error.message);
     }
 };
+
+
+
+const changeImage = (image) => {
+    imageUrl.value = image.image.startsWith('/') ? image.image : `/${image.image}`;
+    // console.log(imageUrl.value);
+};
+
+
+
+
+
+
 </script>
 
 <style>
