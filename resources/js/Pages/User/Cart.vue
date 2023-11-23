@@ -160,7 +160,7 @@
                             <p class="text-sm text-gray-700">including VAT</p>
                         </div>
                     </div>
-                    <Link :href="route('checkout')"
+                    <Link :href="route('check.out')"
                         class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600 px-10 py-2">Check
                         out</Link>
                 </div>

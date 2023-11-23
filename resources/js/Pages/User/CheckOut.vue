@@ -71,17 +71,17 @@
                 <div class="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
                     <p class="mt-8 text-lg font-medium">Select Payment Methods </p>
 
-                    <form class="mt-5 grid gap-6">
+                    <form class="mt-5 grid gap-6" @submit.prevent="placeOrder">
 
                         <div class="">
                             <div class="relative py-2">
-                                <input class="peer hidden" id="radio_for_payment_methods_1" type="radio" name="radio"
-                                    checked />
+                                <input v-model="selectedPaymentMethod" value="cashOnDelivery"
+                                    id="payment_by_cash_on_delivery" class="peer hidden" type="radio" checked />
                                 <span
                                     class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                                 <label
                                     class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
-                                    for="radio_for_payment_methods_1">
+                                    for="payment_by_cash_on_delivery">
                                     <img class="w-14 object-contain"
                                         src="https://w7.pngwing.com/pngs/510/354/png-transparent-food-indian-cuisine-bangladeshi-cuisine-devops-dubai-cash-on-delivery.png"
                                         alt="Cash On Delivery" />
@@ -91,12 +91,13 @@
                                 </label>
                             </div>
                             <div class="relative py-2">
-                                <input class="peer hidden" id="radio_for_payment_methods_2" type="radio" name="radio" />
+                                <input v-model="selectedPaymentMethod" value="stripe" id="payment_by_stripe"
+                                    class="peer hidden" type="radio" />
                                 <span
                                     class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                                 <label
                                     class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
-                                    for="radio_for_payment_methods_2">
+                                    for="payment_by_stripe">
                                     <img class="w-14 object-contain"
                                         src="https://easydigitaldownloads.com/wp-content/uploads/edd/2019/03/stripe-product-image.png"
                                         alt="" />
@@ -113,22 +114,33 @@
                         <div class="">
 
                             <div class="p-1">
-                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                <input type="name" name="name" id="name"
+                                <label for="name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                <input v-model="userInfo.name" type="name" name="name" id="name"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Enter Name Here" required="">
                             </div>
 
                             <div class="p-1">
-                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                <input type="email" name="email" id="email"
+                                <label for="email"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                <input v-model="userInfo.email" type="email" name="email" id="email"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Enter Email Here" required="">
                             </div>
                             <div class="p-1">
                                 <label for="phone"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
-                                <input type="number" name="phone" id="phone" placeholder="01307788699"
+                                <input v-model="userInfo.phone" type="number" name="phone" id="phone"
+                                    placeholder="01307788699"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    required="">
+                            </div>
+                            <div class="p-1">
+                                <label for="address"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
+                                <input v-model="userInfo.address" type="text" name="address" id="address"
+                                    placeholder="address"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     required="">
                             </div>
@@ -151,7 +163,8 @@
                                 <p class="text-2xl font-semibold text-gray-900">${{ totalAmount.toFixed(2) }}</p>
                             </div>
                         </div>
-                        <button class="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">Place
+                        <button
+                            class="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">Place
                             Order</button>
 
                     </form>
@@ -170,112 +183,10 @@
 import UserLayout from "./Layouts/UserLayout.vue";
 
 import { ref, computed } from "vue";
-import { Head, usePage, } from "@inertiajs/vue3";
+import { Head, usePage,useForm, router } from "@inertiajs/vue3";
 import Swal from "sweetalert2";
 const products = ref(usePage().props.products);
 const carts = ref(usePage().props.carts);
-
-
-const increment = async (cart) => {
-    try {
-        const response = await axios.get(
-            "/add-to-cart-increment/" + cart.product_id
-        );
-        Swal.fire({
-            toast: true,
-            icon: "success",
-            position: "top-end",
-            text: "Add to cart increment successfully",
-            showCloseButton: true,
-            showConfirmButton: false,
-            timer: 5000,
-        });
-
-        updateCartViews();
-    } catch (error) {
-        console.error("Error adding to cart:", error.message);
-    }
-};
-const decrement = async (cart) => {
-    try {
-        const response = await axios.get(
-            "/add-to-cart-decrement/" + cart.product_id
-        );
-        Swal.fire({
-            toast: true,
-            icon: "success",
-            position: "top-end",
-            text: "Add to cart decrement successfully",
-            showCloseButton: true,
-            showConfirmButton: false,
-            timer: 5000,
-        });
-
-        updateCartViews();
-    } catch (error) {
-        console.error("Error decrement from cart:", error.message);
-    }
-};
-
-const remove = async (cart) => {
-    try {
-        const response = await axios.get(
-            "/add-to-cart-remove/" + cart.product_id
-        );
-        Swal.fire({
-            toast: true,
-            icon: "success",
-            position: "top-end",
-            text: "Add to cart remove successfully",
-            showCloseButton: true,
-            showConfirmButton: false,
-            timer: 5000,
-        });
-
-        updateCartViews();
-        const total = usePage().props.total;
-        usePage().props.total = total - 1;
-
-    } catch (error) {
-        console.error("Error removing to cart:", error.message);
-    }
-};
-
-const updateCartViews = async () => {
-    try {
-        const update_cart_views = await axios.get("/update-cart-views");
-        products.value = update_cart_views.data.products;
-        carts.value = update_cart_views.data.carts;
-    } catch (error) {
-        console.error("Error updating cart views:", error);
-    }
-};
-const removeAllFormCart = async () => {
-    try {
-        const removeAllFormCart = await axios.get("/remove-all-from-cart");
-
-        if (removeAllFormCart) {
-            Swal.fire({
-                toast: true,
-                icon: "success",
-                position: "top-end",
-                text: "Remove all product form cart successfully",
-                showCloseButton: true,
-                showConfirmButton: false,
-                timer: 5000,
-            });
-
-            updateCartViews();
-
-            const total = usePage().props.total;
-            usePage().props.total = total - total;
-        }
-
-    } catch (error) {
-        console.error("Error Remove all product form cart:", error);
-    }
-};
-
 
 
 // this code for shippingCharge subtotal totalAmount
@@ -292,6 +203,49 @@ const totalAmount = computed(() => {
 
 
 
+const selectedPaymentMethod = ref(""); // To store the selected payment method
+const userInfo = ref({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+});
+const placeOrder = () => {
+    // Basic client-side logic to simulate order placement
+    const orderDetails = {
+        paymentMethod: selectedPaymentMethod.value,
+        userInfo: userInfo.value,
+        totalAmount: totalAmount.value,
+    };
+
+    try {
+        // console.log(useThisFormForBrandCreateOrUpdate);
+
+        // Append each image file to form data
+        router.post(
+            "/checkout",
+            orderDetails,
+            {
+                onSuccess: (page) => {
+                    orderDetails.reset();
+                    Swal.fire({
+                        toast: true,
+                        icon: "success",
+                        position: "top-end",
+                        text: "Place Order successfully",
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        timer: 5000,
+                    });
+                },
+            }
+        );
+    } catch (e) {
+        console.log(e);
+    }
+
+
+}
 
 </script>
 

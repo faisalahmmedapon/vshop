@@ -50,7 +50,8 @@ Route::get('/product-details/{slug}', [DashboardController::class, 'details'])->
 
 
 
-Route::get('/check-out', [CheckOutController::class, 'index'])->name('checkout')->middleware('auth');
+Route::get('/check-out', [CheckOutController::class, 'index'])->name('check.out')->middleware('auth');
+Route::post('/checkout', [CheckOutController::class, 'checkout'])->name('checkout')->middleware('auth');
 
 
 

@@ -18,4 +18,22 @@ class CheckOutController extends Controller
             'carts' => $carts,
         ]);
     }
+    public function checkout(Request $request)
+    {
+
+        return $request->paymentMethod;
+
+        // $carts = Cart::with('product', 'product.product_images')->where('user_id', auth()->user()->id)->get();
+
+        // return Inertia::render('User/CheckOut', [
+        //     'carts' => $carts,
+        // ]);
+    }
+
+
+
+
+
+
+
 }
