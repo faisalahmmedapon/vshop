@@ -160,9 +160,9 @@
                             <p class="text-sm text-gray-700">including VAT</p>
                         </div>
                     </div>
-                    <button
-                        class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check
-                        out</button>
+                    <Link :href="route('checkout')"
+                        class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600 px-10 py-2">Check
+                        out</Link>
                 </div>
             </div>
 
@@ -310,7 +310,7 @@
 import UserLayout from "./Layouts/UserLayout.vue";
 
 import { ref , computed } from "vue";
-import { Head, usePage, } from "@inertiajs/vue3";
+import { Head, usePage, Link } from "@inertiajs/vue3";
 import Swal from "sweetalert2";
 const products = ref(usePage().props.products);
 const carts = ref(usePage().props.carts);

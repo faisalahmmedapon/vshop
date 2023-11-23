@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\User\AddToCartController;
+use App\Http\Controllers\User\CheckOutController;
 use App\Http\Controllers\User\UserController;
 use App\Models\User\CategoryProducts;
 
@@ -43,6 +44,16 @@ Route::get('/remove-all-from-cart', [AddToCartController::class, 'removeAllFormC
 // search product by category
 Route::get('/products/{slug}', [CategoryProducts::class, 'category'])->name('category');
 Route::get('/product-details/{slug}', [DashboardController::class, 'details'])->name('product_detail');
+
+
+
+
+
+
+Route::get('/check-out', [CheckOutController::class, 'index'])->name('checkout')->middleware('auth');
+
+
+
 
 
 // user routes end
