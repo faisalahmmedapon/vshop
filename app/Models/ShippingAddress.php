@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class ShippingAddress extends Model
 {
     use HasFactory;
 
 
     protected $fillable = [
-        'invoice_id',
-        'total_price',
-        'status',
+        'name',
+        'email',
+        'phone',
+        'address_1',
         'user_id',
-        'shipping_id',
     ];
 }

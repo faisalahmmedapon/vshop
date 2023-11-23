@@ -116,7 +116,7 @@
                             <div class="p-1">
                                 <label for="name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                <input v-model="userInfo.name" type="name" name="name" id="name"
+                                <input v-model="shipping_address.name" type="name" name="name" id="name"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Enter Name Here" required="">
                             </div>
@@ -124,14 +124,14 @@
                             <div class="p-1">
                                 <label for="email"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                <input v-model="userInfo.email" type="email" name="email" id="email"
+                                <input v-model="shipping_address.email" type="email" name="email" id="email"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Enter Email Here" required="">
                             </div>
                             <div class="p-1">
                                 <label for="phone"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
-                                <input v-model="userInfo.phone" type="number" name="phone" id="phone"
+                                <input v-model="shipping_address.phone" type="number" name="phone" id="phone"
                                     placeholder="01307788699"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     required="">
@@ -139,7 +139,7 @@
                             <div class="p-1">
                                 <label for="address"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
-                                <input v-model="userInfo.address" type="text" name="address" id="address"
+                                <input v-model="shipping_address.address" type="text" name="address" id="address"
                                     placeholder="address"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     required="">
@@ -204,7 +204,7 @@ const totalAmount = computed(() => {
 
 
 const selectedPaymentMethod = ref(""); // To store the selected payment method
-const userInfo = ref({
+const shipping_address = ref({
     name: "",
     email: "",
     phone: "",
@@ -214,7 +214,7 @@ const placeOrder = () => {
     // Basic client-side logic to simulate order placement
     const orderDetails = {
         paymentMethod: selectedPaymentMethod.value,
-        userInfo: userInfo.value,
+        shipping_address: shipping_address.value,
         totalAmount: totalAmount.value,
     };
 
